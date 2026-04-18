@@ -1,0 +1,99 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const tools = [
+  { category: 'Infraestrutura', items: ['pfSense', 'Proxmox', 'TrueNAS', 'Samba AD', 'MikroTik', 'Docker', 'Linux'] },
+  { category: 'Segurança', items: ['Burp Suite', 'Nuclei', 'subfinder', 'ffuf', 'dalfox', 'Shodan', 'nmap'] },
+  { category: 'Dev & Automação', items: ['Python', 'Bash', 'Git', 'Ansible'] },
+];
+---
+
+<Layout title="Sobre — André Fragata" description="Sobre André Fragata — infraestrutura, segurança e automação.">
+  <Header />
+
+  <main style="max-width: 720px; margin: 0 auto; padding: 0 1.5rem;">
+
+    <section style="padding: 4rem 0 3rem;">
+      <h1 style="font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin-bottom: 2rem;">
+        Sobre
+      </h1>
+
+      <div class="prose" style="margin-bottom: 3rem;">
+        <p>
+          Trabalho com TI desde 2021, atualmente gerenciando a infraestrutura da
+          <strong>Prefeitura Municipal de Francisco Beltrão, PR</strong> — redes, servidores,
+          virtualização e suporte a +200 usuários.
+        </p>
+        <p>
+          No tempo livre, me dedico a <strong>bug bounty</strong> e segurança ofensiva,
+          com foco em reconhecimento automatizado e análise de vulnerabilidades web.
+          Gosto de construir ferramentas que resolvem problemas específicos, mesmo que
+          só eu vá usar.
+        </p>
+        <p>
+          Esse site é um espaço para registrar o que aprendo, mostrar o que construo
+          e pensar em voz alta sobre tecnologia, infraestrutura e segurança.
+        </p>
+      </div>
+
+      <!-- Tools -->
+      <div style="margin-bottom: 3rem;">
+        <h2 style="font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 1.5rem;">
+          Ferramentas & tecnologias
+        </h2>
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          {tools.map(group => (
+            <div>
+              <p style="font-size: 0.8125rem; color: var(--text-muted); font-weight: 500; margin-bottom: 0.625rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                {group.category}
+              </p>
+              <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                {group.items.map(item => (
+                  <span style="font-size: 0.8125rem; padding: 0.25rem 0.625rem; border-radius: 5px; border: 1px solid var(--border); color: var(--text); font-family: var(--font-mono);">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h2 style="font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 1rem;">
+          Contato
+        </h2>
+        <div style="display: flex; flex-direction: column; gap: 0.625rem;">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span style="font-size: 0.875rem; color: var(--text-muted); width: 80px;">Email</span>
+            <a href="mailto:andrefragata14@gmail.com" style="font-size: 0.875rem; color: var(--accent);">
+              andrefragata14@gmail.com
+            </a>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span style="font-size: 0.875rem; color: var(--text-muted); width: 80px;">GitHub</span>
+            <a href="https://github.com/OwLinxs" target="_blank" rel="noopener noreferrer" style="font-size: 0.875rem; color: var(--accent);">
+              github.com/OwLinxs
+            </a>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span style="font-size: 0.875rem; color: var(--text-muted); width: 80px;">LinkedIn</span>
+            <a href="https://linkedin.com/in/andrefragata" target="_blank" rel="noopener noreferrer" style="font-size: 0.875rem; color: var(--accent);">
+              linkedin.com/in/andrefragata
+            </a>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span style="font-size: 0.875rem; color: var(--text-muted); width: 80px;">Localização</span>
+            <span style="font-size: 0.875rem; color: var(--text);">Francisco Beltrão, PR — Brasil</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
