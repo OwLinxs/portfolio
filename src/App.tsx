@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { BlogProvider } from './context/BlogContext';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
@@ -41,7 +41,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 const App: React.FC = () => {
   return (
     <BlogProvider>
-      <BrowserRouter>
+      <HashRouter>
         <ScrollToTop />
         <MainLayout>
           <Routes>
@@ -51,7 +51,7 @@ const App: React.FC = () => {
             <Route path="/curriculo" element={<Resume />} />
           </Routes>
         </MainLayout>
-      </BrowserRouter>
+      </HashRouter>
     </BlogProvider>
   );
 };
