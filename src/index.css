@@ -1,0 +1,354 @@
+/* ==========================================================================
+   DESIGN SYSTEM - PORTFÓLIO & BLOG ANDRÉ FRAGATA
+   Aesthetica: European Minimalist (Off-white, Negative Space, Premium Serif Display)
+   ========================================================================== */
+
+/* Variables & Design Tokens */
+:root {
+  /* Light Mode Palette */
+  --bg-color: #FAFAF9;
+  --text-color: #111111;
+  --text-muted: #6B6661;
+  --accent-color: #1A1A1A;
+  --border-color: #E7E5E4;
+  --card-bg: #F5F5F4;
+  --drawer-overlay: rgba(0, 0, 0, 0.4);
+  
+  /* Fonts */
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  
+  /* Transitions */
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: all 0.2s ease;
+  
+  /* Layout */
+  --max-width: 1200px;
+}
+
+/* Dark Mode Variables Override */
+html.dark-mode {
+  --bg-color: #0F0F0E;
+  --text-color: #F5F5F4;
+  --text-muted: #A19B95;
+  --accent-color: #F5F5F4;
+  --border-color: #272726;
+  --card-bg: #181817;
+  --drawer-overlay: rgba(0, 0, 0, 0.7);
+}
+
+/* CSS Resets & Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+body {
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  color: var(--text-color);
+  line-height: 1.15;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+button, input, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+/* Layout Utilities */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.section {
+  padding: 8rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.section:last-of-type {
+  border-bottom: none;
+}
+
+/* Asymmetric Grid System */
+.asymmetric-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+@media (min-width: 768px) {
+  .asymmetric-grid {
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+  }
+}
+
+/* Title Styles */
+.section-title {
+  font-size: 3rem;
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+  position: sticky;
+  top: 6rem;
+}
+
+/* Base Components */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--text-color);
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.btn-primary:hover {
+  background-color: transparent;
+  color: var(--text-color);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.btn-secondary:hover {
+  border-color: var(--text-color);
+  background-color: var(--text-color);
+  color: var(--bg-color);
+}
+
+/* Intersection Observer Reveal Animate Classes */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Navigation Drawer Styles */
+.drawer-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--drawer-overlay);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.drawer-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drawer-content {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  background-color: var(--bg-color);
+  border-left: 1px solid var(--border-color);
+  box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+  z-index: 1001;
+  padding: 3rem 2rem;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.drawer-backdrop.open .drawer-content {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.drawer-close-btn {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: var(--transition-fast);
+  padding: 0.5rem;
+  line-height: 1;
+}
+
+.drawer-close-btn:hover {
+  color: var(--text-color);
+}
+
+/* Markdown and highlight.js Base Styles */
+.prose {
+  font-family: var(--font-sans);
+  line-height: 1.8;
+  color: var(--text-color);
+}
+
+.prose h1 {
+  font-size: 2.75rem;
+  margin: 2rem 0 1rem 0;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.prose h2 {
+  font-size: 1.85rem;
+  margin: 2rem 0 1rem 0;
+  font-weight: 400;
+}
+
+.prose h3 {
+  font-size: 1.35rem;
+  margin: 1.5rem 0 0.5rem 0;
+}
+
+.prose p {
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+}
+
+.prose ul, .prose ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+}
+
+.prose strong {
+  font-weight: 600;
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--text-color);
+  padding-left: 1.5rem;
+  font-style: italic;
+  color: var(--text-muted);
+  margin: 1.5rem 0;
+}
+
+/* Syntax Highlighting overrides for a clean aesthetic */
+.prose pre {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border-radius: 0;
+}
+
+.prose code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9em;
+  padding: 0.2rem 0.4rem;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+}
+
+.prose pre code {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  display: block;
+}
+
+/* Highlight.js Minimal Themes integration */
+.hljs-comment, .hljs-quote {
+  color: var(--text-muted);
+  font-style: italic;
+}
+.hljs-keyword, .hljs-selector-tag, .hljs-literal {
+  font-weight: bold;
+}
+.hljs-number, .hljs-string, .hljs-meta-keyword {
+  color: #16A34A; /* Soft green for values */
+}
+html.dark-mode .hljs-number, html.dark-mode .hljs-string {
+  color: #4ADE80;
+}
+.hljs-title, .hljs-section {
+  font-weight: bold;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
